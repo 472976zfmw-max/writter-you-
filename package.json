@@ -1,0 +1,16 @@
+{
+  "name": "writeright",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check api/orders.js && node --check api/orders/[orderId].js && node --check api/team/orders.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
+    "formidable": "^3.5.2"
+  },
+  "devDependencies": {
+    "vercel": "^41.4.1"
+  }
+}

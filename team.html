@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="WriteRight team dashboard for managing homework writing orders." />
+    <title>WriteRight Team Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="notice-bar"><span class="notice-dot"></span><strong>Team workspace</strong> · Private operations dashboard</div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="WriteRight customer app"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a>
+      <nav class="main-nav" aria-label="Team navigation"><a href="#orders">Orders</a><a href="#notes">Internal notes</a><a href="index.html">Customer app ↗</a></nav>
+      <span class="admin-label">RIYA KAPOOR · ADMIN</span>
+    </header>
+    <main id="orders" class="admin-page">
+      <section class="admin-section shell">
+        <div class="admin-heading"><div><p class="eyebrow">For the writing team</p><h1>A desk that keeps everyone in sync.</h1></div><span class="admin-label">TEAM VIEW · LIVE</span></div>
+        <div class="admin-window">
+          <aside class="admin-sidebar"><div class="admin-brand"><span class="brand-mark">W</span><strong>WriteRight</strong></div><a class="selected" href="#orders">Orders <span>12</span></a><a href="#orders">In progress <span>4</span></a><a href="#orders">Completed</a><a href="#notes">Payments</a><div class="sidebar-bottom"><span class="avatar">RK</span><span><strong>Riya Kapoor</strong><small>Admin</small></span></div></aside>
+          <div class="admin-content"><div class="admin-toolbar"><div><h2>Orders</h2><p>Keep the pages moving.</p></div><button class="button button-dark" type="button">＋ New order</button></div><div class="orders-table"><div class="table-row table-head"><span>Order</span><span>Customer</span><span>Homework</span><span>Amount</span><span>Status</span></div><div class="table-row"><span><strong>#WR-2048</strong><small>Today, 10:18 AM</small></span><span><strong id="team-customer-name">Ananya Sharma</strong><small id="team-customer-phone">+91 98765 43210</small></span><span><strong id="team-homework-summary">Science · Class 8</strong><small id="team-file-summary">8 pages · 2 files</small></span><span><strong>₹229</strong><small>Paid · incl. ₹49 delivery</small></span><select class="status-select"><option>Work in progress</option><option>Homework completed</option><option>Out for delivery</option><option>Delivered</option></select></div><div class="table-row"><span><strong>#WR-2047</strong><small>Yesterday, 4:45 PM</small></span><span><strong>Vivan Mehta</strong><small>+91 99887 66554</small></span><span><strong>Maths · Class 6</strong><small>5 pages · 1 file</small></span><span><strong>₹174</strong><small>Paid · incl. ₹49 delivery</small></span><span class="done-status">Delivered</span></div></div><div class="submission-detail" id="submission-detail"><div><p class="eyebrow">Latest customer submission</p><h3 id="team-detail-title">Science homework · Class 8</h3></div><div class="submission-detail-grid"><div><small>Submitted text</small><p id="team-homework-text">No pasted text yet. Open the uploaded files below to review the assignment.</p></div><div><small>Files and preferences</small><p id="team-files">2 files · Blue ink · Neat & clear handwriting</p><p><strong>Instructions:</strong> <span id="team-instructions">Please use blue ink for diagrams.</span></p></div></div></div><div class="admin-note" id="notes"><span>Internal note</span><p>“Please use blue ink for Ananya’s science diagrams. Sample attached.”</p><a href="index.html#submission">Open customer app →</a></div></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="index.html"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a><span>Private team workspace · Customer app remains separate.</span><span>© 2026 WriteRight</span></div></footer>
+    <script src="team.js"></script>
+  </body>
+</html>

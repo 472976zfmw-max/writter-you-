@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Handwritten homework on loose pages, personalised to your preference and delivered to your door." />
+    <title>WriteRight — Handwritten homework, your way</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="notice-bar"><span class="notice-dot"></span><strong>Pages only, never notebooks.</strong> We write homework on loose, individual pages.</div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="WriteRight home"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#order">Place an order</a>
+        <a href="#track">Track order</a>
+      </nav>
+      <a class="admin-link" href="team.html">Team dashboard <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">A little help, beautifully written</p>
+          <h1>Get your homework <em>handwritten,</em> your way.</h1>
+          <p class="hero-lede">Submit your homework online, choose your handwriting preference, pay securely, and get your completed handwritten pages delivered.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#order">Write my homework <span aria-hidden="true">→</span></a>
+            <a class="button button-quiet" href="#track">Track my order</a>
+          </div>
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true"><span>R</span><span>A</span><span>M</span><span>+</span></div>
+            <span><strong>Made by our writing team</strong><br />Clear pages. Careful work. On the way to you.</span>
+          </div>
+        </div>
+        <div class="hero-paper" aria-label="Example order preview">
+          <div class="paper-tape"></div>
+          <div class="paper-head"><span>WRITER'S DESK</span><span>ORDER #WR-2048</span></div>
+          <div class="paper-line large-line">Your homework,<br /><span>sorted.</span></div>
+          <div class="paper-checks">
+            <div><span class="check">✓</span><span>Content received</span><strong>Done</strong></div>
+            <div><span class="check">✓</span><span>Blue ink · Neat style</span><strong>Chosen</strong></div>
+            <div class="paper-active"><span class="pulse"></span><span>Writing in progress</span><strong>Today</strong></div>
+          </div>
+          <div class="paper-footer"><span>Loose pages only</span><span>Est. delivery · 2–3 days</span></div>
+        </div>
+      </section>
+
+      <section class="trust-row shell" aria-label="Service benefits">
+        <div><span class="trust-icon">✦</span><span><strong>Personalised writing</strong><small>Pick a style that feels like you</small></span></div>
+        <div><span class="trust-icon">⌁</span><span><strong>Secure payments</strong><small>UPI, cards & net banking</small></span></div>
+        <div><span class="trust-icon">◎</span><span><strong>Track every step</strong><small>From our desk to your door</small></span></div>
+      </section>
+
+      <section class="section shell" id="how-it-works">
+        <div class="section-heading"><div><p class="eyebrow">The easy bit</p><h2>From upload to doorstep.</h2></div><p>Everything you need, in one calm little flow.</p></div>
+        <div class="steps">
+          <div class="step active"><span>01</span><strong>Enter your details</strong><small>Tell us where to send it</small></div>
+          <div class="step"><span>02</span><strong>Upload homework</strong><small>PDF, photos or text</small></div>
+          <div class="step"><span>03</span><strong>Choose your writing</strong><small>Style, colour, details</small></div>
+          <div class="step"><span>04</span><strong>Pay online</strong><small>Delivery included upfront</small></div>
+          <div class="step"><span>05</span><strong>We write & deliver</strong><small>Follow the journey</small></div>
+        </div>
+      </section>
+
+      <section class="order-section" id="order">
+        <div class="shell order-layout">
+          <div class="order-form">
+            <div class="form-topline"><span class="step-badge">1</span><span>Customer details</span><span class="form-progress">1 of 3</span></div>
+            <h2>Where should we send your pages?</h2>
+            <p class="muted">We’ll use these details to keep you updated and deliver your finished homework safely.</p>
+            <form id="customer-form">
+              <div class="field-grid">
+                <label>Full name<input required name="name" placeholder="e.g. Ananya Sharma" /></label>
+                <label>Mobile number<input required name="phone" inputmode="tel" placeholder="+91 98765 43210" /></label>
+              </div>
+              <label>Email address <span class="optional">optional</span><input type="email" name="email" placeholder="you@example.com" /></label>
+              <label>Complete delivery address<textarea required name="address" rows="3" placeholder="Flat / house number, street, landmark"></textarea></label>
+              <div class="field-grid">
+                <label>Area / society<input required name="area" placeholder="e.g. Green Park Society" /></label>
+                <label>Pincode<input required name="pincode" inputmode="numeric" placeholder="400001" /></label>
+              </div>
+              <button type="button" class="button button-primary full" id="continue-order">Continue to homework <span>→</span></button>
+            </form>
+            <div class="policy-note"><span>!</span><p><strong>Important:</strong> We write homework only on pages. We do not write directly in notebooks.</p></div>
+          </div>
+          <aside class="order-aside">
+            <p class="eyebrow">Your order at a glance</p>
+            <h3>Simple, clear pricing.</h3>
+            <p>Delivery is always shown before you pay. No surprises after you submit.</p>
+            <div class="aside-rule"></div>
+            <div class="mini-summary"><span>Writing from</span><strong>₹15 <small>/ page</small></strong></div>
+            <div class="mini-summary"><span>Delivery from</span><strong>₹49</strong></div>
+            <div class="mini-summary"><span>Typical turnaround</span><strong>2–3 days</strong></div>
+            <a href="#invoice" class="text-link">See sample bill <span>→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="submission-section shell" id="submission">
+        <div class="section-heading"><div><p class="eyebrow">Step 2 & 3</p><h2>Give us the work.<br />Make it yours.</h2></div><p>Upload a clear copy or paste your text, then choose how you want it written.</p></div>
+        <div class="submission-grid">
+          <div class="submission-main">
+            <div class="segmented" role="tablist"><button class="tab active" data-tab="upload">Upload homework</button><button class="tab" data-tab="paste">Enter / paste text</button></div>
+            <div class="tab-panel active" id="upload-panel">
+              <label class="dropzone" for="file-upload"><span class="upload-icon">↑</span><strong>Drop files here or <u>browse</u></strong><small>PDF, JPG, PNG, DOCX · Multiple files accepted</small><input id="file-upload" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" /></label>
+              <div id="file-list" class="file-list"></div>
+              <p class="helper"><span>i</span> Please make sure your uploaded content is clear and readable.</p>
+            </div>
+            <div class="tab-panel" id="paste-panel">
+              <label>Homework text              <textarea id="homework-text" rows="8" placeholder="Paste your questions, notes or assignment here..."></textarea></label>
+              <p class="helper"><span>i</span> Add line breaks where you want separate answers or pages.</p>
+            </div>
+            <div class="detail-fields">
+              <div class="field-grid">
+                <label>Number of pages <span class="optional">if known</span><input id="pages" type="number" min="1" placeholder="e.g. 8" /></label>
+                <label>Subject<input id="subject" placeholder="e.g. Science" /></label>
+              </div>
+              <div class="field-grid">
+                <label>Class / grade<input id="grade" placeholder="e.g. Class 8" /></label>
+                <label>Writing colour<select id="colour"><option>Blue</option><option>Black</option></select></label>
+              </div>
+              <label>Special instructions <span class="optional">optional</span><textarea id="instructions" rows="3" placeholder="Anything our writers should know?"></textarea></label>
+            </div>
+          </div>
+          <div class="handwriting-panel">
+            <div class="panel-heading"><span class="step-badge">3</span><div><p class="eyebrow">Personalised handwriting</p><h3>Choose your look.</h3></div></div>
+            <p class="muted">Select the style that feels right for your homework.</p>
+            <div class="style-options">
+              <label class="style-card selected"><input type="radio" name="style" checked /><span class="style-preview neat">Aa</span><span><strong>Neat & clear</strong><small>Easy to read</small></span><span class="radio-dot"></span></label>
+              <label class="style-card"><input type="radio" name="style" /><span class="style-preview casual">Aa</span><span><strong>Natural notes</strong><small>Relaxed & friendly</small></span><span class="radio-dot"></span></label>
+              <label class="style-card"><input type="radio" name="style" /><span class="style-preview classic">Aa</span><span><strong>Classic cursive</strong><small>Elegant & personal</small></span><span class="radio-dot"></span></label>
+            </div>
+            <label class="sample-upload"><span>＋</span><span><strong>Upload a handwriting sample</strong><small>Optional · JPG, PNG or PDF</small></span><input type="file" /></label>
+            <p class="small-note">Upload a clear sample of the handwriting you want us to follow.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="tracking-section" id="track">
+        <div class="shell tracking-layout">
+          <div><p class="eyebrow">Already placed an order?</p><h2>Know where your pages are.</h2><p>Enter your order ID and mobile number to see the latest update from our desk.</p></div>
+          <form class="track-form" id="track-form"><label>Order ID<input value="WR-2048" aria-label="Order ID" /></label><label>Mobile number<input placeholder="+91 98765 43210" aria-label="Mobile number" /></label><button class="button button-primary" type="submit">Track order <span>→</span></button><p class="track-message" id="track-message"></p></form>
+        </div>
+        <div class="shell status-card" id="status-card">
+          <div class="status-head"><div><span class="live-dot"></span><strong id="customer-status">Your homework is in progress</strong><small>Order #WR-2048 · Updated today, 11:42 AM</small></div><span class="status-pill">WORK IN PROGRESS</span></div>
+          <div class="status-line"><div class="status-node done"><span>✓</span><small>Order placed</small></div><div class="status-connector done"></div><div class="status-node current"><span>2</span><small>Work in progress</small></div><div class="status-connector"></div><div class="status-node"><span>3</span><small>Homework completed</small></div><div class="status-connector"></div><div class="status-node"><span>4</span><small>Out for delivery</small></div><div class="status-connector"></div><div class="status-node"><span>5</span><small>Delivered</small></div></div>
+        </div>
+      </section>
+
+      <section class="invoice-section shell" id="invoice">
+        <div class="invoice-copy"><p class="eyebrow">Clear from the first rupee</p><h2>Your bill, without the guesswork.</h2><p>Every order includes a digital bill, so you always know what you’re paying for — including delivery.</p><div class="payment-callout"><div><strong>Secure online payment</strong><small>UPI · Credit / debit card · Net banking</small></div><button class="button button-primary" id="pay-button" type="button">Pay ₹229 <span>→</span></button></div><a class="text-link" href="#order">Start an order <span>→</span></a></div>
+        <div class="invoice-paper"><div class="invoice-top"><div class="brand"><span class="brand-mark">W</span><span>Write<span>Right</span></span></div><span class="paid-badge">PAID</span></div><div class="invoice-meta"><span><small>Bill to</small><strong>Ananya Sharma</strong><small>Order #WR-2048 · 11 Sep 2026</small></span><span><small>Payment method</small><strong>UPI ·•• 4821</strong></span></div><div class="invoice-items"><div><span>Homework writing · 8 pages</span><strong>₹120</strong></div><div><span>Personalised neat style</span><strong>₹60</strong></div><div><span>Delivery charges</span><strong>₹49</strong></div><div class="invoice-total"><span>Total amount paid</span><strong>₹229</strong></div></div><div class="invoice-foot">Pages only · Notebooks not included <span>Thank you for trusting us.</span></div></div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#top"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a><span>Handwritten homework, made simple.</span><span>© 2026 WriteRight</span></div></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
