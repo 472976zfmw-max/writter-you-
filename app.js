@@ -160,12 +160,6 @@ document.querySelector("#track-form").addEventListener("submit", (event) => {
     });
 });
 
-document.querySelector("#pay-button").addEventListener("click", (event) => {
-  event.currentTarget.innerHTML = "Payment successful ✓";
-  event.currentTarget.classList.add("button-dark");
-  event.currentTarget.classList.remove("button-primary");
-});
-
 renderCustomerStatus(readOrderStatus());
 window.addEventListener("storage", (event) => {
   if (event.key === orderStorageKey) renderCustomerStatus(readOrderStatus());
