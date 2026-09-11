@@ -4,6 +4,33 @@ const orderStorageKey = "writeright-order-WR-2048";
 const submissionStorageKey = "writeright-submission-WR-2048";
 const orderStatuses = ["Order placed", "Work in progress", "Homework completed", "Out for delivery", "Delivered"];
 const orderChannel = "BroadcastChannel" in window ? new BroadcastChannel("writeright-orders") : null;
+let pricing = { pagePrice: 20, deliveryCharge: null };
+const pricingStorageKey = "writeright-pricing";
+
+async function loadPricing() {
+  try {
+    const response = await fetch("/api/settings");
+    if (!response.ok) throw new Error("Unable to load pricing.");
+    const { settings } = await response.json();
+    renderPricing({ pagePrice: Number(settings.page_price), deliveryCharge: Number(settings.delivery_charge), deliveryEstimate: settings.delivery_estimate });
+  } catch {
+    try {
+      const saved = JSON.parse(localStorage.getItem(pricingStorageKey));
+      if (saved) renderPricing(saved);
+      else document.querySelector("#delivery-price").textContent = "Set by our team";
+    } catch {
+      document.querySelector("#delivery-price").textContent = "Set by our team";
+    }
+  }
+
+  function renderPricing(nextPricing) {
+    pricing = nextPricing;
+    document.querySelector("#page-price").innerHTML = `₹${pricing.pagePrice} <small>/ page</small>`;
+    document.querySelector("#delivery-price").textContent = `₹${pricing.deliveryCharge}`;
+    document.querySelector("#delivery-estimate").textContent = pricing.deliveryEstimate;
+    document.querySelector("#paper-delivery-estimate").textContent = `Est. delivery · ${pricing.deliveryEstimate}`;
+  }
+}
 
 function readOrderStatus() {
   try {
@@ -161,10 +188,12 @@ document.querySelector("#track-form").addEventListener("submit", (event) => {
 });
 
 renderCustomerStatus(readOrderStatus());
+loadPricing();
 window.addEventListener("storage", (event) => {
   if (event.key === orderStorageKey) renderCustomerStatus(readOrderStatus());
 });
 orderChannel?.addEventListener("message", (event) => {
   if (event.data?.key === orderStorageKey) renderCustomerStatus(event.data.status);
+  if (event.data?.key === "writeright-pricing-updated") renderPricing(event.data.pricing);
 });
 window.setInterval(() => renderCustomerStatus(readOrderStatus()), 1000);

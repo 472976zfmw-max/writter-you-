@@ -51,6 +51,18 @@ create table public.order_history (
   created_at timestamptz not null default now()
 );
 
+create table public.site_settings (
+  id integer primary key default 1 check (id = 1),
+  page_price numeric(10,2) not null default 20,
+  delivery_charge numeric(10,2) not null default 49,
+  delivery_estimate text not null default '2–3 days',
+  updated_at timestamptz not null default now()
+);
+
+insert into public.site_settings (id, page_price, delivery_charge, delivery_estimate)
+values (1, 20, 49, '2–3 days')
+on conflict (id) do nothing;
+
 create index orders_order_number_idx on public.orders(order_number);
 create index orders_mobile_idx on public.orders(mobile);
 create index order_history_order_id_idx on public.order_history(order_id);

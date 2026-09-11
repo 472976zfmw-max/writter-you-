@@ -13,10 +13,12 @@ export default async function handler(req, res) {
     if (missing.length) return json(res, 400, { error: `Missing fields: ${missing.join(", ")}.` });
 
     const pages = Number.isFinite(Number(body.pages)) ? Number(body.pages) : null;
-    const writingCharge = pages ? pages * 15 : 0;
-    const deliveryCharge = 49;
-    const total = writingCharge + deliveryCharge;
     const supabase = adminClient();
+    const { data: settings, error: settingsError } = await supabase.from("site_settings").select("page_price,delivery_charge").eq("id", 1).single();
+    if (settingsError) throw settingsError;
+    const writingCharge = pages ? pages * Number(settings.page_price) : 0;
+    const deliveryCharge = Number(settings.delivery_charge);
+    const total = writingCharge + deliveryCharge;
     const { data, error } = await supabase.from("orders").insert({
       order_number: orderNumber(),
       customer_name: body.name.trim(),
