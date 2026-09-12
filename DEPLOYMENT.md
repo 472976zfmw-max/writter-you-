@@ -15,11 +15,12 @@ When a customer completes the details step, their homework submission is stored 
 
 ## Production setup
 
-1. Create a Supabase project and run `supabase/schema.sql` in the SQL editor.
-2. Add `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `SUPABASE_ANON_KEY`, and `TEAM_EMAILS` as Vercel environment variables. Never expose the secret key in browser code.
-3. Import this repository into Vercel and deploy. The customer app submits to `/api/orders`; tracking reads `/api/orders/:orderId`.
+1. Create a Supabase project and run `supabase/schema.sql` in the SQL editor. For an existing database, also run `supabase/migrations/20260912140000_customer_accounts.sql`.
+2. In Supabase Auth settings, choose the email/password provider and add your production customer URL to the redirect allow list.
+3. Add `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `SUPABASE_ANON_KEY`, and `TEAM_EMAILS` as Vercel environment variables. Never expose the secret key in browser code.
+4. Import this repository into Vercel and deploy. Customers create accounts from the `My account` section; `/api/orders` and `/api/customer/orders` only accept the signed-in customer's Auth token.
 4. Protect `team.html` with Vercel access protection or a Supabase Auth login before giving the URL to staff. The team API route requires a bearer token and should be connected to your Supabase Auth session.
 5. Connect your custom domain to Vercel. Keep the customer and team pages on the same project/origin so storage and live updates work consistently.
 
-The current code includes the production database/API foundation, but payment-gateway credentials, Supabase Auth login UI, and real file uploads must be configured with your provider credentials before accepting real orders.
+The current code includes the production database/API foundation, customer account login, password recovery, and order history. Payment-gateway credentials and real file uploads still need to be configured with your provider credentials before accepting real orders. Existing guest orders cannot be automatically assigned to a new account; only orders placed after account sign-in appear in customer history.
 ## 

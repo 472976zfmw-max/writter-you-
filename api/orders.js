@@ -1,4 +1,4 @@
-import { adminClient, json, readJson } from "./_lib/supabase.js";
+import { adminClient, json, readJson, requireCustomer } from "./_lib/supabase.js";
 
 function orderNumber() {
   return `WR-${Date.now().toString().slice(-6)}`;
@@ -8,6 +8,8 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return json(res, 405, { error: "Method not allowed." });
   try {
     const body = await readJson(req);
+    const customer = await requireCustomer(req);
+    if (!customer) return json(res, 401, { error: "Please sign in before placing an order." });
     const required = ["name", "phone", "address", "area", "pincode"];
     const missing = required.filter((key) => !String(body[key] || "").trim());
     if (missing.length) return json(res, 400, { error: `Missing fields: ${missing.join(", ")}.` });
@@ -21,9 +23,10 @@ export default async function handler(req, res) {
     const total = writingCharge + deliveryCharge;
     const { data, error } = await supabase.from("orders").insert({
       order_number: orderNumber(),
+      customer_id: customer.id,
       customer_name: body.name.trim(),
       mobile: body.phone.trim(),
-      email: body.email?.trim() || null,
+      email: customer.email || body.email?.trim() || null,
       address: body.address.trim(),
       area: body.area.trim(),
       pincode: body.pincode.trim(),

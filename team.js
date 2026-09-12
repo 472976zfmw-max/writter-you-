@@ -66,6 +66,7 @@ document.querySelector("#save-pricing")?.addEventListener("click", async () => {
   const deliveryEstimate = document.querySelector("#delivery-estimate").value.trim();
   if (!Number.isFinite(deliveryCharge) || deliveryCharge < 0 || !deliveryEstimate) {
     message.textContent = "Enter a valid charge and delivery estimate.";
+    message.focus();
     return;
   }
   message.textContent = "Saving…";

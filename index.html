@@ -11,19 +11,20 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="notice-bar"><span class="notice-dot"></span><strong>Pages only, never notebooks.</strong> We write homework on loose, individual pages.</div>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="WriteRight home"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a>
+      <a class="brand" href="#top" aria-label="WriteRight home"><span class="brand-mark" aria-hidden="true">W</span><span>Write<span>Right</span></span></a>
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="#how-it-works">How it works</a>
         <a href="#order">Place an order</a>
         <a href="#track">Track order</a>
       </nav>
-      <a class="admin-link" href="team.html">Team dashboard <span aria-hidden="true">↗</span></a>
+      <div class="header-actions"><a class="account-link" href="#account" id="account-link">Sign in</a><a class="admin-link" href="team.html">Team dashboard <span aria-hidden="true">↗</span></a></div>
     </header>
 
-    <main id="top">
-      <section class="hero shell">
+    <main id="main-content">
+      <section class="hero shell" data-flow-content hidden>
         <div class="hero-copy">
           <p class="eyebrow">A little help, beautifully written</p>
           <h1>Get your homework <em>handwritten,</em> your way.</h1>
@@ -50,13 +51,39 @@
         </div>
       </section>
 
-      <section class="trust-row shell" aria-label="Service benefits">
+      <section class="account-section shell" id="account">
+        <div class="account-copy"><p class="eyebrow">Your private desk</p><h2>Keep every homework order in one place.</h2><p>Sign in to place orders, follow delivery updates, and revisit your completed homework history anytime.</p><div class="account-benefits"><span>✓ Past orders saved</span><span>✓ Secure password recovery</span><span>✓ Only your orders are visible</span></div></div>
+        <div class="account-card">
+          <div id="auth-forms">
+            <div class="auth-tabs" role="tablist"><button class="auth-tab active" data-auth-view="login">Sign in</button><button class="auth-tab" data-auth-view="signup">Create account</button><button class="auth-tab" data-auth-view="reset">Forgot password</button></div>
+            <form class="auth-form" id="login-form" data-auth-panel="login"><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label><label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Your password" /></label><button class="button button-primary full" type="submit">Sign in <span>→</span></button></form>
+            <form class="auth-form" id="signup-form" data-auth-panel="signup" hidden><label>Full name<input name="name" autocomplete="name" required placeholder="e.g. Ananya Sharma" /></label><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label><label>Create password<input name="password" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters" /></label><button class="button button-primary full" type="submit">Create my account <span>→</span></button></form>
+            <form class="auth-form" id="reset-form" data-auth-panel="reset" hidden><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label><button class="button button-primary full" type="submit">Email reset link <span>→</span></button></form>
+            <p class="auth-message" id="auth-message" aria-live="polite"></p>
+          </div>
+          <div id="account-dashboard" hidden><div class="account-card-head"><div><p class="eyebrow">Signed in</p><h3 id="account-name">Your account</h3><small id="account-email"></small></div><button class="button button-quiet" id="sign-out" type="button">Sign out</button></div><form class="auth-form recovery-form" id="recovery-form" hidden><label>New password<input name="password" type="password" minlength="6" required placeholder="At least 6 characters" /></label><button class="button button-primary full" type="submit">Set new password <span>→</span></button></form><div class="history-heading"><strong>Homework history</strong><span id="history-count">0 orders</span></div><div id="order-history" class="order-history"><p class="empty-history">Your completed and current orders will appear here.</p></div></div>
+        </div>
+      </section>
+
+      <nav class="flow-rail shell" aria-label="Order progress" data-flow-content hidden>
+        <div class="flow-step active"><span>1</span><strong>Account</strong><small>Signed in</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>2</span><strong>Details</strong><small>Delivery address</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>3</span><strong>Homework</strong><small>Upload and personalise</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>4</span><strong>Payment</strong><small>Review and pay</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>5</span><strong>Track</strong><small>Follow delivery</small></div>
+      </nav>
+
+      <section class="trust-row shell" aria-label="Service benefits" data-flow-content hidden>
         <div><span class="trust-icon">✦</span><span><strong>Personalised writing</strong><small>Pick a style that feels like you</small></span></div>
         <div><span class="trust-icon">⌁</span><span><strong>Secure payments</strong><small>UPI, cards & net banking</small></span></div>
         <div><span class="trust-icon">◎</span><span><strong>Track every step</strong><small>From our desk to your door</small></span></div>
       </section>
 
-      <section class="section shell" id="how-it-works">
+      <section class="section shell" id="how-it-works" data-flow-content hidden>
         <div class="section-heading"><div><p class="eyebrow">The easy bit</p><h2>From upload to doorstep.</h2></div><p>Everything you need, in one calm little flow.</p></div>
         <div class="steps">
           <div class="step active"><span>01</span><strong>Enter your details</strong><small>Tell us where to send it</small></div>
@@ -67,22 +94,22 @@
         </div>
       </section>
 
-      <section class="order-section" id="order">
+      <section class="order-section" id="order" data-flow-content hidden>
         <div class="shell order-layout">
           <div class="order-form">
-            <div class="form-topline"><span class="step-badge">1</span><span>Customer details</span><span class="form-progress">1 of 3</span></div>
+            <div class="form-topline"><span class="step-badge">2</span><span>Customer details</span><span class="form-progress">Step 2 of 5</span></div>
             <h2>Where should we send your pages?</h2>
             <p class="muted">We’ll use these details to keep you updated and deliver your finished homework safely.</p>
             <form id="customer-form">
               <div class="field-grid">
-                <label>Full name<input required name="name" placeholder="e.g. Ananya Sharma" /></label>
-                <label>Mobile number<input required name="phone" inputmode="tel" placeholder="+91 98765 43210" /></label>
+                <label>Full name<input required name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" /></label>
+                <label>Mobile number<input required name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" /></label>
               </div>
-              <label>Email address <span class="optional">optional</span><input type="email" name="email" placeholder="you@example.com" /></label>
-              <label>Complete delivery address<textarea required name="address" rows="3" placeholder="Flat / house number, street, landmark"></textarea></label>
+              <label>Email address <span class="optional">optional</span><input type="email" name="email" autocomplete="email" spellcheck="false" placeholder="you@example.com" /></label>
+              <label>Complete delivery address<textarea required name="address" autocomplete="street-address" rows="3" placeholder="Flat / house number, street, landmark"></textarea></label>
               <div class="field-grid">
-                <label>Area / society<input required name="area" placeholder="e.g. Green Park Society" /></label>
-                <label>Pincode<input required name="pincode" inputmode="numeric" placeholder="400001" /></label>
+                <label>Area / society<input required name="area" autocomplete="address-level2" placeholder="e.g. Green Park Society" /></label>
+                <label>Pincode<input required name="pincode" autocomplete="postal-code" inputmode="numeric" placeholder="400001" /></label>
               </div>
               <button type="button" class="button button-primary full" id="continue-order">Continue to homework <span>→</span></button>
             </form>
@@ -100,50 +127,63 @@
         </div>
       </section>
 
-      <section class="submission-section shell" id="submission">
-        <div class="section-heading"><div><p class="eyebrow">Step 2 & 3</p><h2>Give us the work.<br />Make it yours.</h2></div><p>Upload a clear copy or paste your text, then choose how you want it written.</p></div>
+      <section class="submission-section shell" id="submission" data-flow-content hidden>
+        <div class="section-heading"><div><p class="eyebrow">Step 3</p><h2>Give us the work.<br />Make it yours.</h2></div><p>Upload a clear copy or paste your text, then choose how you want it written.</p></div>
         <div class="submission-grid">
           <div class="submission-main">
-            <div class="segmented" role="tablist"><button class="tab active" data-tab="upload">Upload homework</button><button class="tab" data-tab="paste">Enter / paste text</button></div>
-            <div class="tab-panel active" id="upload-panel">
-              <label class="dropzone" for="file-upload"><span class="upload-icon">↑</span><strong>Drop files here or <u>browse</u></strong><small>PDF, JPG, PNG, DOCX · Multiple files accepted</small><input id="file-upload" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" /></label>
+            <div class="segmented" role="tablist" aria-label="Homework input method"><button class="tab active" id="upload-tab" role="tab" aria-selected="true" aria-controls="upload-panel" data-tab="upload">Upload homework</button><button class="tab" id="paste-tab" role="tab" aria-selected="false" aria-controls="paste-panel" data-tab="paste">Enter / paste text</button></div>
+            <div class="tab-panel active" id="upload-panel" role="tabpanel" aria-labelledby="upload-tab">
+              <label class="dropzone" for="file-upload"><span class="upload-icon" aria-hidden="true">↑</span><strong>Drop files here or <u>browse</u></strong><small>PDF, JPG, PNG, DOCX · Multiple files accepted</small><input id="file-upload" name="homework-files" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" /></label>
               <div id="file-list" class="file-list"></div>
               <p class="helper"><span>i</span> Please make sure your uploaded content is clear and readable.</p>
             </div>
-            <div class="tab-panel" id="paste-panel">
-              <label>Homework text              <textarea id="homework-text" rows="8" placeholder="Paste your questions, notes or assignment here..."></textarea></label>
+            <div class="tab-panel" id="paste-panel" role="tabpanel" aria-labelledby="paste-tab" hidden>
+              <label>Homework text              <textarea id="homework-text" name="homework-text" rows="8" placeholder="Paste your questions, notes or assignment here…"></textarea></label>
               <p class="helper"><span>i</span> Add line breaks where you want separate answers or pages.</p>
             </div>
             <div class="detail-fields">
               <div class="field-grid">
-                <label>Number of pages <span class="optional">if known</span><input id="pages" type="number" min="1" placeholder="e.g. 8" /></label>
-                <label>Subject<input id="subject" placeholder="e.g. Science" /></label>
+                <label>Number of pages <span class="optional">if known</span><input id="pages" name="pages" type="number" min="1" placeholder="e.g. 8" /></label>
+                <label>Subject<input id="subject" name="subject" placeholder="e.g. Science" /></label>
               </div>
               <div class="field-grid">
-                <label>Class / grade<input id="grade" placeholder="e.g. Class 8" /></label>
-                <label>Writing colour<select id="colour"><option>Blue</option><option>Black</option></select></label>
+                <label>Class / grade<input id="grade" name="grade" placeholder="e.g. Class 8" /></label>
+                <label>Writing colour<select id="colour" name="colour"><option>Blue</option><option>Black</option></select></label>
               </div>
-              <label>Special instructions <span class="optional">optional</span><textarea id="instructions" rows="3" placeholder="Anything our writers should know?"></textarea></label>
+              <label>Special instructions <span class="optional">optional</span><textarea id="instructions" name="instructions" rows="3" placeholder="Anything our writers should know?"></textarea></label>
             </div>
           </div>
           <div class="handwriting-panel">
             <div class="panel-heading"><span class="step-badge">3</span><div><p class="eyebrow">Personalised handwriting</p><h3>Choose your look.</h3></div></div>
             <p class="muted">Select the style that feels right for your homework.</p>
             <div class="style-options">
-              <label class="style-card selected"><input type="radio" name="style" checked /><span class="style-preview neat">Aa</span><span><strong>Neat & clear</strong><small>Easy to read</small></span><span class="radio-dot"></span></label>
-              <label class="style-card"><input type="radio" name="style" /><span class="style-preview casual">Aa</span><span><strong>Natural notes</strong><small>Relaxed & friendly</small></span><span class="radio-dot"></span></label>
-              <label class="style-card"><input type="radio" name="style" /><span class="style-preview classic">Aa</span><span><strong>Classic cursive</strong><small>Elegant & personal</small></span><span class="radio-dot"></span></label>
+              <label class="style-card selected"><input type="radio" name="style" value="Neat & clear" checked /><span class="style-preview neat" aria-hidden="true">Aa</span><span><strong>Neat & clear</strong><small>Easy to read</small></span><span class="radio-dot" aria-hidden="true"></span></label>
+              <label class="style-card"><input type="radio" name="style" value="Natural notes" /><span class="style-preview casual" aria-hidden="true">Aa</span><span><strong>Natural notes</strong><small>Relaxed & friendly</small></span><span class="radio-dot" aria-hidden="true"></span></label>
+              <label class="style-card"><input type="radio" name="style" value="Classic cursive" /><span class="style-preview classic" aria-hidden="true">Aa</span><span><strong>Classic cursive</strong><small>Elegant & personal</small></span><span class="radio-dot" aria-hidden="true"></span></label>
             </div>
             <label class="sample-upload"><span>＋</span><span><strong>Upload a handwriting sample</strong><small>Optional · JPG, PNG or PDF</small></span><input type="file" /></label>
             <p class="small-note">Upload a clear sample of the handwriting you want us to follow.</p>
           </div>
         </div>
+        <button class="button button-primary continue-payment" id="continue-to-payment" type="button">Review payment <span>→</span></button>
       </section>
 
-      <section class="tracking-section" id="track">
+      <section class="payment-section shell" id="payment" data-flow-content hidden>
+        <div class="section-heading"><div><p class="eyebrow">Step 4</p><h2>Review and pay.</h2></div><p>Your final amount includes writing charges and the delivery charge set by our team.</p></div>
+        <div class="payment-layout">
+          <div class="payment-card"><h3>Secure online payment</h3><p class="muted">Choose a payment method. This checkout is ready for your payment gateway connection.</p><div class="payment-methods"><label><input type="radio" name="payment-method" value="UPI" checked /> UPI</label><label><input type="radio" name="payment-method" value="Card" /> Credit / debit card</label><label><input type="radio" name="payment-method" value="Net banking" /> Net banking</label></div><button class="button button-primary full" id="pay-order" type="button">Pay and place order <span>→</span></button><p id="payment-message" class="auth-message" aria-live="polite"></p></div>
+          <aside class="payment-summary"><p class="eyebrow">Your order bag</p><h3 class="summary-title">Ready to send</h3><div class="summary-item"><span>Handwritten homework</span><strong id="checkout-pages">Pages to confirm</strong></div><div class="summary-item"><span>Writing charges</span><strong id="checkout-writing">₹0</strong></div><div class="summary-item"><span>Delivery charge</span><strong id="checkout-delivery">₹0</strong></div><div class="mini-summary"><span>Total to pay</span><strong class="checkout-total" id="checkout-total">₹0</strong></div><p class="small-note">Important: We write homework only on pages. We do not write directly in notebooks.</p></aside>
+        </div>
+      </section>
+
+      <section class="confirmation-section shell" id="confirmation" data-flow-content hidden>
+        <div class="confirmation-card"><span class="confirmation-icon">✓</span><p class="eyebrow">Step 5 · Payment successful</p><h2>Your order is confirmed.</h2><p>Your homework is now with our writing team. Save your order ID to follow every update.</p><div class="confirmation-meta"><span>Order ID<strong id="confirmed-order-id">-</strong></span><span>Amount paid<strong id="confirmed-amount">₹0</strong></span><span>Delivery estimate<strong id="confirmed-estimate">-</strong></span></div><a class="button button-primary" href="#track">Track my order <span>→</span></a></div>
+      </section>
+
+      <section class="tracking-section" id="track" data-flow-content hidden>
         <div class="shell tracking-layout">
-          <div><p class="eyebrow">Already placed an order?</p><h2>Know where your pages are.</h2><p>Enter your order ID and mobile number to see the latest update from our desk.</p></div>
-          <form class="track-form" id="track-form"><label>Order ID<input value="WR-2048" aria-label="Order ID" /></label><label>Mobile number<input placeholder="+91 98765 43210" aria-label="Mobile number" /></label><button class="button button-primary" type="submit">Track order <span>→</span></button><p class="track-message" id="track-message"></p></form>
+          <div><p class="eyebrow">Final step</p><h2>Know where your pages are.</h2><p>Enter your order ID and mobile number to see the latest update from our desk.</p></div>
+          <form class="track-form" id="track-form"><label>Order ID<input name="order-id" autocomplete="off" value="WR-2048" /></label><label>Mobile number<input name="tracking-phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" /></label><button class="button button-primary" type="submit">Track order <span aria-hidden="true">→</span></button><p class="track-message" id="track-message" aria-live="polite"></p></form>
         </div>
         <div class="shell status-card" id="status-card">
           <div class="status-head"><div><span class="live-dot"></span><strong id="customer-status">Your homework is in progress</strong><small>Order #WR-2048 · Updated today, 11:42 AM</small></div><span class="status-pill">WORK IN PROGRESS</span></div>
@@ -153,6 +193,8 @@
 
     </main>
     <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#top"><span class="brand-mark">W</span><span>Write<span>Right</span></span></a><span>Handwritten homework, made simple.</span><span>© 2026 WriteRight</span></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

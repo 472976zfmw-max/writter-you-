@@ -25,3 +25,11 @@ export async function requireTeam(req) {
   const { data, error } = await adminClient().auth.getUser(token);
   return !error && Boolean(data.user?.email && allowed.includes(data.user.email));
 }
+
+export async function requireCustomer(req) {
+  const token = req.headers.authorization?.replace(/^Bearer\s+/i, "");
+  if (!token) return null;
+  const { data, error } = await adminClient().auth.getUser(token);
+  if (error || !data.user) return null;
+  return data.user;
+}

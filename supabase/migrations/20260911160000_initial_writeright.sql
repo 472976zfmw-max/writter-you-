@@ -14,6 +14,7 @@ end $$;
 
 create table if not exists public.orders (
   id uuid primary key default gen_random_uuid(),
+  customer_id uuid references auth.users(id) on delete cascade,
   order_number text not null unique,
   customer_name text not null,
   mobile text not null,
@@ -71,6 +72,7 @@ on conflict (id) do nothing;
 
 create index if not exists orders_order_number_idx on public.orders(order_number);
 create index if not exists orders_mobile_idx on public.orders(mobile);
+create index if not exists orders_customer_id_idx on public.orders(customer_id);
 create index if not exists order_history_order_id_idx on public.order_history(order_id);
 
 create or replace function public.set_updated_at()
