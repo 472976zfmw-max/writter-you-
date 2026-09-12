@@ -176,28 +176,52 @@ document.querySelectorAll(".style-card").forEach((card) => {
 document.querySelector("#continue-order").addEventListener("click", async () => {
   const form = document.querySelector("#customer-form");
   if (!form.reportValidity()) return;
-  const submission = saveSubmission();
-  const button = document.querySelector("#continue-order");
+  saveSubmission();
+  document.querySelector("#submission").scrollIntoView({ behavior: "smooth" });
+});
+
+document.querySelector("#pay-order").addEventListener("click", async () => {
+  const button = document.querySelector("#pay-order");
+  const message = document.querySelector("#payment-message");
   button.disabled = true;
-  button.innerHTML = "Saving your order…";
+  button.textContent = "Confirming order…";
+  message.textContent = "";
   try {
+    const submission = saveSubmission();
     const result = await createLiveOrder(submission);
-    if (result.order?.order_number) {
-      localStorage.setItem(orderStorageKey, "Order placed");
-      document.querySelector("#track-form input").value = result.order.order_number;
-    }
+    const order = result.order;
+    localStorage.setItem(orderStorageKey, "Order placed");
+    document.querySelector("#track-form input").value = order.order_number;
+    document.querySelector("#confirmed-order-id").textContent = order.order_number;
+    document.querySelector("#confirmed-amount").textContent = `₹${Number(order.total).toFixed(0)}`;
+    document.querySelector("#confirmed-estimate").textContent = pricing.deliveryEstimate || "As scheduled";
+    document.querySelector("#confirmation").hidden = false;
+    document.querySelector("#confirmation").scrollIntoView({ behavior: "smooth" });
   } catch (error) {
-    const message = document.querySelector("#auth-message");
-    if (message) {
-      message.textContent = error.message;
-      message.classList.add("is-error");
-    }
-    document.querySelector("#account")?.scrollIntoView({ behavior: "smooth" });
+    message.textContent = error.message;
+    message.classList.add("is-error");
   } finally {
     button.disabled = false;
-    button.innerHTML = "Continue to homework <span>→</span>";
+    button.innerHTML = "Pay and place order <span>→</span>";
   }
-  document.querySelector("#submission").scrollIntoView({ behavior: "smooth" });
+});
+
+function renderCheckoutSummary() {
+  const pages = Number(document.querySelector("#pages")?.value || 0);
+  const writing = pages * Number(pricing.pagePrice || 20);
+  const delivery = Number(pricing.deliveryCharge || 0);
+  document.querySelector("#checkout-writing").textContent = `₹${writing}`;
+  document.querySelector("#checkout-delivery").textContent = `₹${delivery}`;
+  document.querySelector("#checkout-total").textContent = `₹${writing + delivery}`;
+}
+
+document.querySelector("#pages")?.addEventListener("input", renderCheckoutSummary);
+document.querySelector("#submission")?.addEventListener("click", (event) => {
+  if (event.target.closest(".handwriting-panel")) return;
+  if (event.target.matches("#continue-to-payment")) {
+    renderCheckoutSummary();
+    document.querySelector("#payment").scrollIntoView({ behavior: "smooth" });
+  }
 });
 
 document.querySelector("#track-form").addEventListener("submit", (event) => {

@@ -31,6 +31,9 @@
 
   function renderUser(user) {
     currentUser = user;
+    document.querySelectorAll("[data-flow-content]").forEach((section) => {
+      section.hidden = !user;
+    });
     if (!user) {
       forms.hidden = false;
       dashboard.hidden = true;
