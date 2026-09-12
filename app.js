@@ -25,7 +25,11 @@ async function loadPricing() {
 
   function renderPricing(nextPricing) {
     pricing = nextPricing;
-    document.querySelector("#page-price").innerHTML = `₹${pricing.pagePrice} <small>/ page</small>`;
+    const pagePrice = document.querySelector("#page-price");
+    pagePrice.textContent = `₹${pricing.pagePrice} `;
+    const unit = document.createElement("small");
+    unit.textContent = "/ page";
+    pagePrice.append(unit);
     document.querySelector("#delivery-price").textContent = `₹${pricing.deliveryCharge}`;
     document.querySelector("#delivery-estimate").textContent = pricing.deliveryEstimate;
     document.querySelector("#paper-delivery-estimate").textContent = `Est. delivery · ${pricing.deliveryEstimate}`;
@@ -66,8 +70,9 @@ function saveOrderStatus(value) {
   } catch {
     // The UI still updates for this tab if storage is unavailable.
   }
+}
 
-  function saveSubmission() {
+function saveSubmission() {
     const selectedStyle = document.querySelector(".style-card.selected strong")?.textContent || "Neat & clear";
     const submission = {
       name: document.querySelector('[name="name"]')?.value.trim() || "New customer",
@@ -90,7 +95,7 @@ function saveOrderStatus(value) {
     return submission;
   }
 
-  async function createLiveOrder(submission) {
+async function createLiveOrder(submission) {
     const form = document.querySelector("#customer-form");
     const payload = {
       ...submission,
@@ -99,14 +104,17 @@ function saveOrderStatus(value) {
       area: form.querySelector('[name="area"]')?.value || "",
       pincode: form.querySelector('[name="pincode"]')?.value || ""
     };
+    const headers = { "Content-Type": "application/json" };
+    const token = await window.writerightAuth?.getAccessToken();
+    if (!token) throw new Error("Please sign in before placing an order.");
+    headers.Authorization = ["Bearer", token].join(" ");
     const response = await fetch("/api/orders", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify(payload)
     });
     if (!response.ok) throw new Error("The order could not be saved.");
     return response.json();
-  }
 }
 
 function renderFiles(files) {
@@ -115,7 +123,19 @@ function renderFiles(files) {
     const row = document.createElement("div");
     row.className = "file-row";
     const extension = file.name.split(".").pop().toUpperCase().slice(0, 4);
-    row.innerHTML = `<span class="file-type">${extension}</span><span>${file.name}</span><small>${Math.max(1, Math.round(file.size / 1024))} KB</small><button type="button" aria-label="Remove ${file.name}" data-index="${index}">×</button>`;
+    const type = document.createElement("span");
+    type.className = "file-type";
+    type.textContent = extension;
+    const name = document.createElement("span");
+    name.textContent = file.name;
+    const size = document.createElement("small");
+    size.textContent = `${Math.max(1, Math.round(file.size / 1024))} KB`;
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.setAttribute("aria-label", `Remove ${file.name}`);
+    remove.dataset.index = index;
+    remove.textContent = "×";
+    row.append(type, name, size, remove);
     fileList.appendChild(row);
   });
 }
@@ -134,6 +154,13 @@ document.querySelectorAll(".tab").forEach((tab) => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab, .tab-panel").forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    document.querySelectorAll(".tab").forEach((item) => {
+      if (item !== tab) item.setAttribute("aria-selected", "false");
+    });
+    document.querySelectorAll(".tab-panel").forEach((panel) => {
+      panel.hidden = panel.id !== `${tab.dataset.tab}-panel`;
+    });
     document.querySelector(`#${tab.dataset.tab}-panel`).classList.add("active");
   });
 });
@@ -159,8 +186,13 @@ document.querySelector("#continue-order").addEventListener("click", async () => 
       localStorage.setItem(orderStorageKey, "Order placed");
       document.querySelector("#track-form input").value = result.order.order_number;
     }
-  } catch {
-    // Static preview mode continues to work when the API is not configured.
+  } catch (error) {
+    const message = document.querySelector("#auth-message");
+    if (message) {
+      message.textContent = error.message;
+      message.classList.add("is-error");
+    }
+    document.querySelector("#account")?.scrollIntoView({ behavior: "smooth" });
   } finally {
     button.disabled = false;
     button.innerHTML = "Continue to homework <span>→</span>";
@@ -175,7 +207,10 @@ document.querySelector("#track-form").addEventListener("submit", (event) => {
   const message = document.querySelector("#track-message");
   message.textContent = "Order found. Showing the latest update below.";
   document.querySelector("#status-card").scrollIntoView({ behavior: "smooth", block: "center" });
-  fetch(`/api/orders/${encodeURIComponent(orderNumber)}?mobile=${encodeURIComponent(mobile)}`)
+  const tokenPromise = window.writerightAuth?.getAccessToken();
+  Promise.resolve(tokenPromise).then((token) => fetch(`/api/orders/${encodeURIComponent(orderNumber)}?mobile=${encodeURIComponent(mobile)}`, {
+    headers: token ? { Authorization: ["Bearer", token].join(" ") } : {}
+  }))
     .then((response) => response.ok ? response.json() : Promise.reject(new Error("Order not found.")))
     .then(({ order }) => {
       const statusMap = { order_placed: "Order placed", work_in_progress: "Work in progress", homework_completed: "Homework completed", out_for_delivery: "Out for delivery", delivered: "Delivered" };
@@ -183,7 +218,7 @@ document.querySelector("#track-form").addEventListener("submit", (event) => {
       message.textContent = `Order ${order.order_number} found.`;
     })
     .catch(() => {
-      message.textContent = "Showing the saved demo order. Connect Supabase to enable live tracking.";
+      message.textContent = "Sign in to track an order from your account.";
     });
 });
 

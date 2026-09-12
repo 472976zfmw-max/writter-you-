@@ -10,6 +10,7 @@ create type public.order_status as enum (
 
 create table public.orders (
   id uuid primary key default gen_random_uuid(),
+  customer_id uuid not null references auth.users(id) on delete cascade,
   order_number text not null unique,
   customer_name text not null,
   mobile text not null,
