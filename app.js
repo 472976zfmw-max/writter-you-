@@ -216,9 +216,19 @@ function renderCheckoutSummary() {
 }
 
 document.querySelector("#pages")?.addEventListener("input", renderCheckoutSummary);
+document.querySelector("#subject")?.addEventListener("input", renderCheckoutSummary);
 document.querySelector("#submission")?.addEventListener("click", (event) => {
   if (event.target.closest(".handwriting-panel")) return;
   if (event.target.matches("#continue-to-payment")) {
+    if (!document.querySelector("#customer-form").checkValidity()) {
+      document.querySelector("#customer-form").reportValidity();
+      return;
+    }
+    if (!document.querySelector("#pages").value) {
+      document.querySelector("#pages").focus();
+      document.querySelector("#payment-message").textContent = "Add the number of pages so we can show your exact total.";
+      return;
+    }
     renderCheckoutSummary();
     document.querySelector("#payment").scrollIntoView({ behavior: "smooth" });
   }
@@ -256,3 +266,4 @@ orderChannel?.addEventListener("message", (event) => {
   if (event.data?.key === "writeright-pricing-updated") renderPricing(event.data.pricing);
 });
 window.setInterval(() => renderCustomerStatus(readOrderStatus()), 1000);
+  document.querySelector("#checkout-pages").textContent = pages ? `${pages} ${pages === 1 ? "page" : "pages"} · ${document.querySelector("#subject")?.value || "Homework"}` : "Pages to confirm";

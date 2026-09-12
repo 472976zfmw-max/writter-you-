@@ -65,6 +65,18 @@
         </div>
       </section>
 
+      <nav class="flow-rail shell" aria-label="Order progress" data-flow-content hidden>
+        <div class="flow-step active"><span>1</span><strong>Account</strong><small>Signed in</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>2</span><strong>Details</strong><small>Delivery address</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>3</span><strong>Homework</strong><small>Upload and personalise</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>4</span><strong>Payment</strong><small>Review and pay</small></div>
+        <div class="flow-rule"></div>
+        <div class="flow-step"><span>5</span><strong>Track</strong><small>Follow delivery</small></div>
+      </nav>
+
       <section class="trust-row shell" aria-label="Service benefits" data-flow-content hidden>
         <div><span class="trust-icon">✦</span><span><strong>Personalised writing</strong><small>Pick a style that feels like you</small></span></div>
         <div><span class="trust-icon">⌁</span><span><strong>Secure payments</strong><small>UPI, cards & net banking</small></span></div>
@@ -160,7 +172,7 @@
         <div class="section-heading"><div><p class="eyebrow">Step 4</p><h2>Review and pay.</h2></div><p>Your final amount includes writing charges and the delivery charge set by our team.</p></div>
         <div class="payment-layout">
           <div class="payment-card"><h3>Secure online payment</h3><p class="muted">Choose a payment method. This checkout is ready for your payment gateway connection.</p><div class="payment-methods"><label><input type="radio" name="payment-method" value="UPI" checked /> UPI</label><label><input type="radio" name="payment-method" value="Card" /> Credit / debit card</label><label><input type="radio" name="payment-method" value="Net banking" /> Net banking</label></div><button class="button button-primary full" id="pay-order" type="button">Pay and place order <span>→</span></button><p id="payment-message" class="auth-message" aria-live="polite"></p></div>
-          <aside class="payment-summary"><p class="eyebrow">Order summary</p><div class="mini-summary"><span>Writing charges</span><strong id="checkout-writing">₹0</strong></div><div class="mini-summary"><span>Delivery charge</span><strong id="checkout-delivery">₹0</strong></div><div class="mini-summary"><span>Total</span><strong class="checkout-total" id="checkout-total">₹0</strong></div><p class="small-note">Important: We write homework only on pages. We do not write directly in notebooks.</p></aside>
+          <aside class="payment-summary"><p class="eyebrow">Your order bag</p><h3 class="summary-title">Ready to send</h3><div class="summary-item"><span>Handwritten homework</span><strong id="checkout-pages">Pages to confirm</strong></div><div class="summary-item"><span>Writing charges</span><strong id="checkout-writing">₹0</strong></div><div class="summary-item"><span>Delivery charge</span><strong id="checkout-delivery">₹0</strong></div><div class="mini-summary"><span>Total to pay</span><strong class="checkout-total" id="checkout-total">₹0</strong></div><p class="small-note">Important: We write homework only on pages. We do not write directly in notebooks.</p></aside>
         </div>
       </section>
 

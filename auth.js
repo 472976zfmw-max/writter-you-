@@ -19,21 +19,24 @@
       const config = await response.json();
       client = window.supabase.createClient(config.url, config.anonKey);
       client.auth.onAuthStateChange((event, session) => {
-        renderUser(session?.user || null);
+        renderUser(session?.user || null, event === "SIGNED_IN");
         if (event === "PASSWORD_RECOVERY") document.querySelector("#recovery-form").hidden = false;
       });
       const { data } = await client.auth.getSession();
-      renderUser(data.session?.user || null);
+      renderUser(data.session?.user || null, false);
     } catch (error) {
       showMessage(error.message, true);
     }
   }
 
-  function renderUser(user) {
+  function renderUser(user, shouldScroll = false) {
     currentUser = user;
     document.querySelectorAll("[data-flow-content]").forEach((section) => {
       section.hidden = !user;
     });
+    if (user && shouldScroll) {
+      document.querySelector("#order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     if (!user) {
       forms.hidden = false;
       dashboard.hidden = true;
